@@ -1,0 +1,82 @@
+<title>Réinitialiser votre mot de passe — GetCoach</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground: #ffffff; --panel: #f1f4f7; --panel-edge: #dde4ec;
+    --ink: #101b2a; --ink-soft: #4d5c6e; --primary: #1543d6; --good: #0b7a5b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0d1420; --panel: #161f2e; --panel-edge: #263244;
+      --ink: #eaeff6; --ink-soft: #9fb0c4; --primary: #7ea2ff; --good: #4bc79d;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1420; --panel: #161f2e; --panel-edge: #263244;
+    --ink: #eaeff6; --ink-soft: #9fb0c4; --primary: #7ea2ff; --good: #4bc79d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--ground); color: var(--ink);
+    font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px; line-height: 1.6;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .carte {
+    max-width: 440px; width: 100%; text-align: center;
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 14px; padding: 36px 28px;
+  }
+  .marque {
+    font-family: Archivo, sans-serif; font-weight: 700; font-size: 19px;
+    letter-spacing: -.01em; margin-bottom: 26px;
+  }
+  .marque span { color: var(--primary); }
+  .coche {
+    width: 54px; height: 54px; margin: 0 auto 18px; border-radius: 50%;
+    background: var(--good); color: #fff; display: grid; place-items: center;
+    font-size: 28px; line-height: 1;
+  }
+  h1 {
+    font-family: Archivo, sans-serif; font-weight: 600; font-size: 24px;
+    margin: 0 0 12px; letter-spacing: -.01em; text-wrap: balance;
+  }
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  .bouton {
+    display: inline-block; margin-top: 8px; padding: 13px 26px;
+    background: var(--primary); color: #fff; text-decoration: none;
+    border-radius: 9px; font-weight: 600;
+  }
+  .bouton:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .discret { font-size: 14.5px; margin-top: 20px; }
+</style>
+
+<div class="carte">
+  <div class="marque">Get<span>Coach</span></div>
+  <div class="coche" aria-hidden="true">🔑</div>
+
+  <h1>Choisissez un nouveau mot de passe</h1>
+  <p>Ouvrez GetCoach pour saisir votre nouveau mot de passe. Ce lien n'est valable qu'une fois.</p>
+
+  <a class="bouton" id="ouvrir" href="mycoach://auth/recuperation">Ouvrir GetCoach</a>
+
+  <p class="discret">
+    Si rien ne se passe, c'est que vous lisez ce message sur un ordinateur :
+    ouvrez ce lien depuis le téléphone où GetCoach est installé.
+  </p>
+</div>
+
+<script>
+  // Le lien de reinitialisation porte un code a usage unique. On le transmet
+  // tel quel a l'application, qui ouvrira l'ecran de nouveau mot de passe.
+  // Le chemin « recuperation » la distingue d'une simple confirmation : sans
+  // lui, la personne serait connectee sans jamais pouvoir changer le mot de
+  // passe qu'elle a oublie.
+  var cible = "mycoach://auth/recuperation" + (location.hash || "");
+  document.getElementById("ouvrir").setAttribute("href", cible);
+  setTimeout(function () { location.href = cible; }, 700);
+</script>
